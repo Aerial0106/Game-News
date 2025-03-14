@@ -16,5 +16,5 @@ app.use(bodyParser.json())
 
 var server = app.listen(3000, function()
 {
-    console.log("server is running");
+    console.log("Server is running");
 });
