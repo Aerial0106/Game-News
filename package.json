@@ -1,0 +1,23 @@
+{
+  "name": "game-news",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/Aerial0106/Game-News#readme",
+  "bugs": {
+    "url": "https://github.com/Aerial0106/Game-News/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aerial0106/Game-News.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
