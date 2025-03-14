@@ -6,6 +6,7 @@ router.use("/contact", require(__dirname + "/ContactController"));
 router.use("/single-blog", require(__dirname + "/SingleBlogController"));
 router.use("/review", require(__dirname + "/ReviewController"));
 router.use("/categories", require(__dirname + "/CategoriesController"));
+router.use("/community", require(__dirname + "/CommunityController"));
 
 router.get("/", function (req, res) {
     res.render('index.ejs');
