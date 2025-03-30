@@ -1,6 +1,9 @@
 var express = require("express");
 var app = express();
+const connectDB = require('./config/db');
 
+// Gọi hàm kết nối
+connectDB();
 var controller = require(__dirname  + "/apps/controllers");
 app.use(controller);
 
