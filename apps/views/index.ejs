@@ -39,31 +39,9 @@
 	<!-- Hero section -->
 	<section class="hero-section">
 		<div class="hero-slider owl-carousel">
-			<div class="hs-item set-bg" data-setbg="/static/img/slider-1.jpg">
+			<div class="hs-item set-bg" data-setbg="static/video/BG-2Likes.mp4">
 				<div class="hs-text">
 					<div class="container">
-						<h2>The Best <span>Games</span> Out There</h2>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-							malesuada <br />
-							lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac
-							ligula sapien. <br />Suspendisse cursus faucibus finibus.
-						</p>
-						<a href="#" class="site-btn">Read More</a>
-					</div>
-				</div>
-			</div>
-			<div class="hs-item set-bg" data-setbg="/static/img/slider-2.jpg">
-				<div class="hs-text">
-					<div class="container">
-						<h2>The Best <span>Games</span> Out There</h2>
-						<p>
-							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-							malesuada <br />
-							lorem maximus mauris scelerisque, at rutrum nulla dictum. Ut ac
-							ligula sapien. <br />Suspendisse cursus faucibus finibus.
-						</p>
-						<a href="#" class="site-btn">Read More</a>
 					</div>
 				</div>
 			</div>
@@ -454,14 +432,38 @@
 
 	<!-- Footer section -->
 	<%- include('partical/footer'); %>
-	<!-- Footer section end -->
+		<!-- Footer section end -->
 
-	<!--====== Javascripts & Jquery ======-->
-	<script src="/static/js/jquery-3.2.1.min.js"></script>
-	<script src="/static/js/bootstrap.min.js"></script>
-	<script src="/static/js/owl.carousel.min.js"></script>
-	<script src="/static/js/jquery.marquee.min.js"></script>
-	<script src="/static/js/main.js"></script>
+		<!--====== Javascripts & Jquery ======-->
+		<script src="/static/js/jquery-3.2.1.min.js"></script>
+		<script src="/static/js/bootstrap.min.js"></script>
+		<script src="/static/js/owl.carousel.min.js"></script>
+		<script src="/static/js/jquery.marquee.min.js"></script>
+		<script src="/static/js/main.js"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function () {
+				let videoElements = document.querySelectorAll(".set-bg");
+
+				videoElements.forEach(function (el) {
+					let videoUrl = el.getAttribute("data-setbg");
+					let video = document.createElement("video");
+					video.src = videoUrl;
+					video.autoplay = true;
+					video.loop = true;
+					video.muted = true;
+					video.playsInline = true;
+					video.style.position = "absolute";
+					video.style.width = "100%";
+					video.style.height = "100%";
+					video.style.objectFit = "cover";
+					video.style.top = "0";
+					video.style.left = "0";
+					video.style.zIndex = "-1";
+					el.style.position = "relative";
+					el.prepend(video);
+				});
+			});
+		</script>
 </body>
 
 </html>
