@@ -1,180 +1,18 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Portal - Navigation</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        .header .container {
+            display: flex; /* Sử dụng flexbox để căn chỉnh */
+            justify-content: space-between; /* Đẩy các phần tử ra hai đầu */
+            align-items: center; /* Căn giữa theo chiều dọc */
         }
-        
-        body {
-            background-color: #1a1a1a;
-            color: #fff;
-            line-height: 1.6;
-        }
-        
-        .header {
-            background-color: #121212;
-            padding: 0.8rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .site-logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .site-logo img {
-            max-height: 50px;
-            transition: transform 0.3s;
-        }
-        
-        .site-logo:hover img {
-            transform: scale(1.05);
-        }
-        
         .main-menu {
-            display: flex;
-            align-items: center;
+            flex-grow: 1; /* Cho menu chiếm không gian giữa */
+            margin-right: 20px; /* Khoảng cách với user-panel */
         }
-        
-        .main-menu ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        .main-menu li {
-            position: relative;
-            margin: 0 1rem;
-        }
-        
-        .main-menu a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 0.5rem 0;
-            display: block;
-            position: relative;
-            transition: color 0.3s;
-        }
-        
-        .main-menu a:hover {
-            color: #6c5ce7;
-        }
-        
-        .main-menu a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: #6c5ce7;
-            bottom: 0;
-            left: 0;
-            transition: width 0.3s;
-        }
-        
-        .main-menu a:hover::after {
-            width: 100%;
-        }
-        
         .user-panel {
-            margin-left: 2rem;
-            padding-left: 2rem;
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-            display: flex; /* Đảm bảo các phần tử bên trong thẳng hàng */
-            align-items: center;
-        }
-        
-        .user-panel a {
-            color: #fff;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-            margin-right: 1rem;
-        }
-        
-        .user-panel a:hover {
-            color: #6c5ce7;
-        }
-        
-        .nav-switch {
-            display: none;
-            color: #fff;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        
-        .nav-switch:hover {
-            color: #6c5ce7;
-        }
-        
-        /* Responsive Styles */
-        @media screen and (max-width: 991px) {
-            .container {
-                flex-wrap: wrap;
-            }
-            
-            .main-menu {
-                order: 3;
-                width: 100%;
-                display: none;
-                margin-top: 1rem;
-            }
-            
-            .main-menu.active {
-                display: block;
-            }
-            
-            .main-menu ul {
-                flex-direction: column;
-                width: 100%;
-            }
-            
-            .main-menu li {
-                margin: 0;
-                width: 100%;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-            
-            .main-menu a {
-                padding: 1rem 0;
-            }
-            
-            .user-panel {
-                margin-left: 0;
-                padding-left: 0;
-                border-left: none;
-                order: 2;
-            }
-            
-            .nav-switch {
-                display: block;
-                order: 1;
-            }
-            
-            .site-logo {
-                order: 0;
-            }
+            white-space: nowrap; /* Giữ Login/Register trên cùng một dòng */
         }
     </style>
 </head>
@@ -202,11 +40,5 @@
             </div>
         </div>
     </header>
-    
-    <script>
-        document.querySelector('.nav-switch').addEventListener('click', function() {
-            document.querySelector('.main-menu').classList.toggle('active');
-        });
-    </script>
 </body>
 </html>
