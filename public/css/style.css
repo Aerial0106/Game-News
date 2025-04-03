@@ -1573,3 +1573,27 @@ ol {
 		font-size: 40px;
 	}
 }
+.welcome-text {
+	color: white;
+	font-size: 48px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+	padding: 20px;
+	position: relative;
+	z-index: 10;
+  }
+  
+  .warrior-text {
+	color: #FFD700; /* Màu vàng */
+	font-weight: bolder;
+  }
+  
+  .hs-text {
+	position: relative;
+	z-index: 5;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+  }
