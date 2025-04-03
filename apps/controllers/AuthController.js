@@ -1,4 +1,4 @@
-// apps/controllers/AuthController.js
+require('dotenv').config();
 const User = require('../../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -23,8 +23,10 @@ exports.register = async (req, res) => {
         });
 
         await newUser.save();
+        console.log('User registered:', newUser);
         res.redirect('/auth/login');
     } catch (error) {
+        console.error('Error in register:', error);
         res.render('auth/register', { error: 'Đã có lỗi xảy ra, vui lòng thử lại' });
     }
 };
@@ -46,10 +48,13 @@ exports.login = async (req, res) => {
             return res.render('auth/login', { error: 'Email hoặc mật khẩu không đúng' });
         }
 
-        const token = jwt.sign({ id: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        console.log('Token created:', token);
         res.cookie('token', token, { httpOnly: true });
+        console.log('Cookie set');
         res.redirect('/');
     } catch (error) {
+        console.error('Error in login:', error);
         res.render('auth/login', { error: 'Đã có lỗi xảy ra, vui lòng thử lại' });
     }
 };

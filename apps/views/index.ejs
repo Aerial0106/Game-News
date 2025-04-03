@@ -12,6 +12,8 @@
 
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="/static/css/bootstrap.min.css" />
@@ -19,6 +21,70 @@
 	<link rel="stylesheet" href="/static/css/owl.carousel.css" />
 	<link rel="stylesheet" href="/static/css/style.css" />
 	<link rel="stylesheet" href="/static/css/animate.css" />
+	<style>
+		/* CSS cho header wrapper */
+		.header-wrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+		}
+
+		/* CSS cho user panel */
+		.user-panel {
+			text-align: right;
+			display: flex;
+			align-items: center;
+			gap: 15px;
+		}
+
+		.user-panel a {
+			color: #fff;
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+
+		.user-panel a:hover {
+			color: #f5a623;
+		}
+
+		.user-panel span {
+			color: #fff;
+			margin-right: 5px;
+		}
+
+		/* Style cho nút đăng xuất */
+		.logout-btn {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			padding: 5px 10px;
+			border-radius: 4px;
+			background-color: rgba(255,255,255,0.1);
+			transition: all 0.3s ease;
+		}
+
+		.logout-btn:hover {
+			background-color: rgba(245, 166, 35, 0.2);
+			text-decoration: none;
+		}
+
+		.logout-btn .text {
+			display: none;
+		}
+
+		@media (min-width: 768px) {
+			.logout-btn .text {
+				display: inline;
+			}
+		}
+
+		/* Đảm bảo menu chiếm không gian phù hợp */
+		.main-menu {
+			display: flex;
+			align-items: center;
+		}
+	</style>
 </head>
 
 <body>
@@ -30,8 +96,21 @@
 	<!-- Header section -->
 	<header class="header-section">
 		<div class="container">
-			
-			<%- include('partical/menu'); %>
+			<div class="header-wrapper">
+				<%- include('partical/menu'); %>
+				<div class="user-panel">
+					<% if (username) { %>
+						<span>Xin chào, <%= username %>!</span> 
+						<a href="/auth/logout" class="logout-btn" title="Đăng xuất">
+							<i class="fas fa-sign-out-alt"></i>
+							<span class="text">Đăng xuất</span>
+						</a>
+					<% } else { %>
+						<a href="/auth/login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+						<a href="/auth/register"><i class="fas fa-user-plus"></i> Đăng ký</a>
+					<% } %>
+				</div>
+			</div>
 		</div>
 	</header>
 	<!-- Header section end -->
@@ -268,7 +347,7 @@
 							<div class="score yellow">9.3</div>
 						</div>
 						<div class="review-text">
-							<h5>Assasin’’s Creed</h5>
+							<h5>Assasin''s Creed</h5>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
 								dolor sit ame.
@@ -430,20 +509,21 @@
 
 	<!-- Footer section -->
 	<%- include('partical/footer'); %>
-		<!-- Footer section end -->
+	<!-- Footer section end -->
 
-		<!--====== Javascripts & Jquery ======-->
-		<script src="/static/js/jquery-3.2.1.min.js"></script>
-		<script src="/static/js/bootstrap.min.js"></script>
-		<script src="/static/js/owl.carousel.min.js"></script>
-		<script src="/static/js/jquery.marquee.min.js"></script>
-		<script src="/static/js/main.js"></script>
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-				let videoElements = document.querySelectorAll(".set-bg");
+	<!--====== Javascripts & Jquery ======-->
+	<script src="/static/js/jquery-3.2.1.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.marquee.min.js"></script>
+	<script src="/static/js/main.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			let videoElements = document.querySelectorAll(".set-bg");
 
-				videoElements.forEach(function (el) {
-					let videoUrl = el.getAttribute("data-setbg");
+			videoElements.forEach(function (el) {
+				let videoUrl = el.getAttribute("data-setbg");
+				if (videoUrl && videoUrl.endsWith(".mp4")) {
 					let video = document.createElement("video");
 					video.src = videoUrl;
 					video.autoplay = true;
@@ -459,9 +539,12 @@
 					video.style.zIndex = "-1";
 					el.style.position = "relative";
 					el.prepend(video);
-				});
+				} else if (videoUrl) {
+					el.style.backgroundImage = `url(${videoUrl})`;
+				}
 			});
-		</script>
+		});
+	</script>
 </body>
 
 </html>

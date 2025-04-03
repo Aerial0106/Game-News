@@ -6,7 +6,12 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 // Kết nối database
-connectDB();
+connectDB().then(() => {
+    console.log('Database connection established');
+}).catch(err => {
+    console.error('Failed to connect to database:', err);
+    process.exit(1);
+});
 
 // Middleware
 app.use(express.json());
@@ -18,7 +23,9 @@ app.use(bodyParser.json());
 app.set("views", path.join(__dirname, "apps/views"));
 app.set("view engine", "ejs");
 app.use("/static", express.static(path.join(__dirname, "public")));
-app.use("/partical", express.static(path.join(__dirname, "apps/views/partical")));
+// Xóa dòng này vì partical không cần phục vụ như static files
+// app.use("/partical", express.static(path.join(__dirname, "apps/views/partical")));
+
 
 // Routes
 const singleBlogRouter = require('./apps/controllers/SingleBlogController');
