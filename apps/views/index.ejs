@@ -12,6 +12,8 @@
 
 	<!-- Google Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet" />
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="/static/css/bootstrap.min.css" />
@@ -19,6 +21,70 @@
 	<link rel="stylesheet" href="/static/css/owl.carousel.css" />
 	<link rel="stylesheet" href="/static/css/style.css" />
 	<link rel="stylesheet" href="/static/css/animate.css" />
+	<style>
+		/* CSS cho header wrapper */
+		.header-wrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+		}
+
+		/* CSS cho user panel */
+		.user-panel {
+			text-align: right;
+			display: flex;
+			align-items: center;
+			gap: 15px;
+		}
+
+		.user-panel a {
+			color: #fff;
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+
+		.user-panel a:hover {
+			color: #f5a623;
+		}
+
+		.user-panel span {
+			color: #fff;
+			margin-right: 5px;
+		}
+
+		/* Style cho nút đăng xuất */
+		.logout-btn {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			padding: 5px 10px;
+			border-radius: 4px;
+			background-color: rgba(255,255,255,0.1);
+			transition: all 0.3s ease;
+		}
+
+		.logout-btn:hover {
+			background-color: rgba(245, 166, 35, 0.2);
+			text-decoration: none;
+		}
+
+		.logout-btn .text {
+			display: none;
+		}
+
+		@media (min-width: 768px) {
+			.logout-btn .text {
+				display: inline;
+			}
+		}
+
+		/* Đảm bảo menu chiếm không gian phù hợp */
+		.main-menu {
+			display: flex;
+			align-items: center;
+		}
+	</style>
 </head>
 
 <body>
@@ -30,38 +96,54 @@
 	<!-- Header section -->
 	<header class="header-section">
 		<div class="container">
-			
-			<%- include('partical/menu'); %>
+			<div class="header-wrapper">
+				<%- include('partical/menu'); %>
+				<div class="user-panel">
+					<% if (username) { %>
+						<span>Xin chào, <%= username %>!</span> 
+						<a href="/auth/logout" class="logout-btn" title="Đăng xuất">
+							<i class="fas fa-sign-out-alt"></i>
+							<span class="text">Đăng xuất</span>
+						</a>
+					<% } else { %>
+						<a href="/auth/login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+						<a href="/auth/register"><i class="fas fa-user-plus"></i> Đăng ký</a>
+					<% } %>
+				</div>
+			</div>
 		</div>
 	</header>
 	<!-- Header section end -->
 
 	<!-- Hero section -->
-	<section class="hero-section">
-		<div class="hero-slider owl-carousel">
-			<div class="hs-item set-bg" data-setbg="static/video/BG-2Likes.mp4">
-				<div class="hs-text">
-					<div class="container">
-					</div>
-				</div>
-			</div>
+	<!-- Hero section -->
+<section class="hero-section">
+	<div class="hero-slider owl-carousel">
+	  <div class="hs-item set-bg" data-setbg="static/video/BG-2Likes.mp4">
+		<div class="hs-text">
+		  <div class="container">
+			<h2 class="welcome-text">Chào mừng đến với Game <span class="warrior-text">Warrior</span>!</h2>
+		  </div>
 		</div>
-	</section>
+	  </div>
+	</div>
+  </section>
+  <!-- Hero section end -->
 	<!-- Hero section end -->
 
 	<!-- Latest news section -->
 	<div class="latest-news-section">
-		<div class="ln-title">Latest News</div>
+		<div class="ln-title">Tin Mới Nhất</div>
 		<div class="news-ticker">
 			<div class="news-ticker-contant">
 				<div class="nt-item">
-					<span class="new">new</span>Cựu vương CKTG đáp trả cực gắt "chiến thư" từ đàn em, hé lộ "tử huyệt" của đối thủ
+					<span class="new">drama</span>Cựu vương CKTG đáp trả cực gắt "chiến thư" từ đàn em, hé lộ "tử huyệt" của đối thủ
 				</div>
 				<div class="nt-item">
-					<span class="strategy">strategy</span>Lịch thi đấu Regular Seasons 2025 mới nhất: Các "đại gia" đều gặp khó tuần ra quân
+					<span class="strategy">tin hot</span>Faker đón chào thành tích lịch sử nhưng fan đã mất niềm tin vào T1
 				</div>
 				<div class="nt-item">
-					<span class="racing">racing</span>Tian "cạnh khóe" Gumayusi vì drama T1 khiến cộng đồng tranh cãi
+					<span class="racing">drama</span>Tian "cạnh khóe" Gumayusi vì drama T1 khiến cộng đồng tranh cãi
 				</div>
 			</div>
 		</div>
@@ -74,7 +156,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6 p-0">
 					<div class="feature-item set-bg" data-setbg="/static/img/features/1.jpg">
-						<span class="cata new">new</span>
+						<span class="cata new">drama</span>
 						<div class="fi-content text-white">
 							<h5><a href="/single-blog/67ebfcb5e50f84042a97f3cd"class="blog-title-link">Cựu vương CKTG đáp trả cực gắt "chiến thư" từ đàn em, hé lộ "tử huyệt" của đối thủ</a></h5>
 							<p>Cựu vương CKTG có những chia sẻ sau khi được đàn em gửi "chiến thư".</p>
@@ -84,21 +166,21 @@
 				</div>
 				<div class="col-lg-3 col-md-6 p-0">
 					<div class="feature-item set-bg" data-setbg="/static/img/features/2.jpg">
-						<span class="cata strategy">strategy</span>
+						<span class="cata strategy">tin hot</span>
 						<div class="fi-content text-white">
-							<h5><a href="#">
-								Lịch thi đấu Regular Seasons 2025 mới nhất: Các "đại gia" đều gặp khó tuần ra quân</a></h5>
-							<p>T1 và HLE, Gen.G dự kiến có thể có tuần ra quân Regular Seasons 2025 không dễ chịu.</p>
+							<h5><a href="/single-blog/67ede2d051379c043cf82516">
+								Faker đón chào thành tích lịch sử nhưng fan đã mất niềm tin vào T1</a></h5>
+							<p>Trước thềm Regular Seasons 2025 và thành tích lịch sử của Faker, T1 lại mất niềm tin nơi người hâm mộ.</p>
 							<a href="#" class="fi-comment">3 Comments</a>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 p-0">
 					<div class="feature-item set-bg" data-setbg="/static/img/features/3.jpg">
-						<span class="cata new">new</span>
+						<span class="cata new">drama</span>
 						<div class="fi-content text-white">
 							<h5>
-								<a href="#">Tian "cạnh khóe" Gumayusi vì drama T1 khiến cộng đồng tranh cãi</a>
+								<a href="/single-blog/67eecab24b62689636b1ce7b">Tian "cạnh khóe" Gumayusi vì drama T1 khiến cộng đồng tranh cãi</a>
 							</h5>
 							<p>Sau màn "feed không phanh", Tian còn lên tiếng "cạnh khóe" Gumayusi khiến nhiều ý kiến bày tỏ bức xúc.</p>
 							<a href="#" class="fi-comment">3 Comments</a>
@@ -107,9 +189,9 @@
 				</div>
 				<div class="col-lg-3 col-md-6 p-0">
 					<div class="feature-item set-bg" data-setbg="/static/img/features/4.jpg">
-						<span class="cata racing">racing</span>
+						<span class="cata racing">tft</span>
 						<div class="fi-content text-white">
-							<h5><a href="#">Đấu Trường Chân Lý mùa 14: Thử nghiệm đội hình Twisted Fate Reroll "độc lạ"</a></h5>
+							<h5><a href="/single-blog/67eece2e992c24dfd002d458">Đấu Trường Chân Lý mùa 14: Thử nghiệm đội hình Twisted Fate Reroll "độc lạ"</a></h5>
 							<p>Một trong những đội hình của ĐTCL mùa 14 đang được nhiều game thủ thử nghiệm trên PBE chính là Twisted Fate Reroll.</p>
 							<a href="#" class="fi-comment">3 Comments</a>
 						</div>
@@ -118,111 +200,143 @@
 			</div>
 		</div>
 	</section>
+	
 	<!-- Feature section end -->
 
 	<!-- Recent game section  -->
-	<section class="recent-game-section spad set-bg" data-setbg="/static/img/recent-game-bg.png">
-		<div class="container">
-			<div class="section-title">
-				<div class="cata new">new</div>
-				<h2>Recent Games</h2>
-			</div>
-			<div class="row">
-				<div class="col-lg-4 col-md-6">
-					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="/static/img/recent-game/1.jpg">
-							<div class="cata new">new</div>
-						</div>
-						<div class="rgi-content">
-							<h5>Suspendisse ut justo tem por, rutrum</h5>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-								dolor sit amet, consectetur elit.
-							</p>
-							<a href="#" class="comment">3 Comments</a>
-							<div class="rgi-extra">
-								<div class="rgi-star">
-									<img src="/static/img/icons/star.png" alt="" />
-								</div>
-								<div class="rgi-heart">
-									<img src="/static/img/icons/heart.png" alt="" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="/static/img/recent-game/2.jpg">
-							<div class="cata racing">racing</div>
-						</div>
-						<div class="rgi-content">
-							<h5>Susce pulvinar metus nulla, vel facilisis sem</h5>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-								dolor sit amet, consectetur elit.
-							</p>
-							<a href="#" class="comment">3 Comments</a>
-							<div class="rgi-extra">
-								<div class="rgi-star">
-									<img src="/static/img/icons/star.png" alt="" />
-								</div>
-								<div class="rgi-heart">
-									<img src="/static/img/icons/heart.png" alt="" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="recent-game-item">
-						<div class="rgi-thumb set-bg" data-setbg="/static/img/recent-game/3.jpg">
-							<div class="cata adventure">Adventure</div>
-						</div>
-						<div class="rgi-content">
-							<h5>Suspendisse ut justo tem por, rutrum</h5>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-								dolor sit amet, consectetur elit.
-							</p>
-							<a href="#" class="comment">3 Comments</a>
-							<div class="rgi-extra">
-								<div class="rgi-star">
-									<img src="/static/img/icons/star.png" alt="" />
-								</div>
-								<div class="rgi-heart">
-									<img src="/static/img/icons/heart.png" alt="" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+	<!-- Recent game section  -->
+<section class="recent-game-section spad set-bg" data-setbg="/static/img/recent-game-bg.png">
+    <div class="container">
+        <div class="section-title">
+            <div class="cata new">Tin Tức</div>
+            <h2>Các Trò Chơi Mới Nhất</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <a href="/single-blog/67f0950e821480b77640039c" class="recent-game-link">
+                    <div class="recent-game-item">
+                        <div class="rgi-thumb set-bg" data-setbg="/static/img/recent-game/1.png">
+                            <div class="cata new">New</div>
+                        </div>
+                        <div class="rgi-content">
+                            <h5> "Giữa Mùa 15: Hợp Tác, Nỏ Thần và Hỗn Loạn</h5>
+                            <p>
+                                Hành động ở Mùa 15 chỉ mới bắt đầu nóng lên, và bản cập nhật giữa mùa lần này mang đến hàng loạt nội dung mới, trang phục cực chất và sự kiện không thể bỏ lỡ!
+                            </p>
+                            <div class="comment">3 Comments</div>
+                            <div class="rgi-extra">
+                                <div class="rgi-star">
+                                    <img src="/static/img/icons/star.png" alt="" />
+                                </div>
+                                <div class="rgi-heart">
+                                    <img src="/static/img/icons/heart.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <a href="/single-blog/67f20057c8c8d76dbdcfdc25" class="recent-game-link">
+                    <div class="recent-game-item">
+                        <div class="rgi-thumb set-bg" data-setbg="/static/img/recent-game/2.png">
+                            <div class="cata racing">Racing</div>
+                        </div>
+                        <div class="rgi-content">
+                            <h5>Bước vào Thế Giới Chân Trời vào ngày 25 tháng 4!</h5>
+                            <p>
+								Horizon Realms mang đến cho người chơi cơ hội khám phá một bộ sưu tập được tuyển chọn kỹ lưỡng, bao gồm những bản cập nhật Evolving World được cộng đồng yêu thích nhất trước đây. 
+                            </p>
+                            <div class="comment">3 Comments</div>
+                            <div class="rgi-extra">
+                                <div class="rgi-star">
+                                    <img src="/static/img/icons/star.png" alt="" />
+                                </div>
+                                <div class="rgi-heart">
+                                    <img src="/static/img/icons/heart.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <a href="/single-blog/67f20312063775f70f6dfbd0" class="recent-game-link">
+                    <div class="recent-game-item">
+                        <div class="rgi-thumb set-bg" data-setbg="/static/img/recent-game/3.png">
+                            <div class="cata adventure">Adventure</div>
+                        </div>
+                        <div class="rgi-content">
+                            <h5>Elden Ring: Nightreign là một bản spin-off chơi co-op độc lập</h5>
+                            <p>
+                                Nhà phát hành Bandai Namco đã chính thức công bố Elden Ring: Nightreign – một tựa game spin-off chơi phối hợp độc lập, lấy bối cảnh trong một thế giới song song với Elden Ring.
+                            </p>
+                            <div class="comment">3 Comments</div>
+                            <div class="rgi-extra">
+                                <div class="rgi-star">
+                                    <img src="/static/img/icons/star.png" alt="" />
+                                </div>
+                                <div class="rgi-heart">
+                                    <img src="/static/img/icons/heart.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+    .recent-game-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        transition: all 0.3s ease;
+    }
+
+    .recent-game-link:hover {
+        opacity: 0.9;
+        transform: translateY(-5px);
+    }
+
+    .recent-game-link:hover .recent-game-item {
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .recent-game-item {
+        transition: all 0.3s ease;
+    }
+
+    .rgi-content .comment {
+        color: #666;
+        font-size: 14px;
+        margin: 10px 0;
+    }
+</style>
+<!-- Recent game section end -->
 	<!-- Recent game section end -->
 
 	<!-- Tournaments section -->
 	<section class="tournaments-section spad">
 		<div class="container">
-			<div class="tournament-title">Tournaments</div>
+			<div class="tournament-title">Các Giải Đấu</div>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="tournament-item mb-4 mb-lg-0">
-						<div class="ti-notic">Premium Tournament</div>
+						<div class="ti-notic">Giải Đấu Hot Nhất</div>
 						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="/static/img/tournament/1.jpg"></div>
+							<div class="ti-thumb set-bg" data-setbg="/static/img/tournament/1.png"></div>
 							<div class="ti-text">
-								<h4>World Of WarCraft</h4>
+								<h4>Liên Minh Huyền Thoại: LCK 2025</h4>
 								<ul>
-									<li><span>Tournament Beggins:</span> June 20, 2018</li>
-									<li><span>Tounament Ends:</span> July 01, 2018</li>
-									<li><span>Participants:</span> 10 teams</li>
-									<li><span>Tournament Author:</span> Admin</li>
+									<li><span>Ngày Khai Mạc:</span> 02 04, 2025</li>
+									<li><span>Ngày Kết Round 1-2:</span> 01 06, 2025</li>
+									<li><span>Số Đội Tham Gia:</span> 10 đội</li>
+									<li><span>View cao nhất:</span>509.000 người xem đồng thời</li>
 								</ul>
 								<p>
-									<span>Prizes:</span> 1st place $2000, 2nd place: $1000, 3rd
-									place: $500
+									<span>Giải Thưởng:</span> Nhà Vô Địch $300.000
 								</p>
 							</div>
 						</div>
@@ -230,21 +344,20 @@
 				</div>
 				<div class="col-md-6">
 					<div class="tournament-item">
-						<div class="ti-notic">Premium Tournament</div>
+						<div class="ti-notic">Giải Đấu Hot Nhất</div>
 						<div class="ti-content">
-							<div class="ti-thumb set-bg" data-setbg="/static/img/tournament/2.jpg"></div>
+							<div class="ti-thumb set-bg" data-setbg="/static/img/tournament/2.png"></div>
 							<div class="ti-text">
-								<h4>DOOM</h4>
-								<ul>
-									<li><span>Tournament Beggins:</span> June 20, 2018</li>
-									<li><span>Tounament Ends:</span> July 01, 2018</li>
-									<li><span>Participants:</span> 10 teams</li>
-									<li><span>Tournament Author:</span> Admin</li>
-								</ul>
-								<p>
-									<span>Prizes:</span> 1st place $2000, 2nd place: $1000, 3rd
-									place: $500
-								</p>
+								<h4>Liên Minh Huyền Thoại: LPL 2025</h4>
+<ul>
+    <li><span>Ngày Khai Mạc:</span> 12 01, 2025</li>
+    <li><span>Ngày Kết Thúc Split 1:</span> 31 03, 2025</li>
+    <li><span>Số Đội Tham Gia:</span> 16 đội</li>
+    <li><span>View Cao Nhất:</span> 299.000 người xem đồng thời</li>
+</ul>
+<p>
+    <span>Giải Thưởng:</span> Nhà Vô Địch $300.000
+</p>
 							</div>
 						</div>
 					</div>
@@ -258,65 +371,99 @@
 	<section class="review-section spad set-bg" data-setbg="/static/img/review-bg.png">
 		<div class="container">
 			<div class="section-title">
-				<div class="cata new">new</div>
-				<h2>Recent Reviews</h2>
+				<div class="cata new">Có Thể Bạn Sẽ Thích</div>
+				<h2>Reviews</h2>
 			</div>
 			<div class="row">
 				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="/static/img/review/1.jpg">
-							<div class="score yellow">9.3</div>
+					<a href="https://www.metacritic.com/game/elden-ring/" target="_blank" style="text-decoration: none; color: inherit;">
+						<div class="review-item" style="transition: all 0.3s ease; cursor: pointer; position: relative;">
+							<div class="review-cover set-bg" data-setbg="/static/img/review/1.png">
+								<div class="score yellow">9.6</div>
+								<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0); display: flex; justify-content: center; align-items: center; opacity: 0; transition: all 0.3s ease;">
+									<div style="background-color: rgba(0,0,0,0.7); color: white; padding: 10px 15px; border-radius: 5px;">
+										Xem trên Metacritic
+									</div>
+								</div>
+							</div>
+							<div class="review-text">
+								<h5>Elden Ring</h5>
+								<p>
+									Elden Ring là một thành tựu vĩ đại sau hơn một thập kỷ làm việc của Miyazaki và FromSoftware, và là một ví dụ tuyệt vời về cách tìm ra một cấp độ thú vị hoàn toàn mới trong một công thức đã quen thuộc và có phần cũ kỹ.
+								</p>
+							</div>
+							<style>
+								.review-item:hover {
+									transform: translateY(-10px);
+									box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+								}
+								.review-item:hover .review-cover > div:last-child {
+									opacity: 1;
+									background-color: rgba(255,255,255,0.2);
+								}
+							</style>
 						</div>
-						<div class="review-text">
-							<h5>Assasin’’s Creed</h5>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-								dolor sit ame.
-							</p>
-						</div>
-					</div>
+					</a>
 				</div>
 				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="/static/img/review/2.jpg">
-							<div class="score purple">9.5</div>
+					<a href="https://www.metacritic.com/game/baldurs-gate-3/" target="_blank" style="text-decoration: none; color: inherit;">
+						<div class="review-item" style="transition: all 0.3s ease; cursor: pointer; position: relative;">
+							<div class="review-cover set-bg" data-setbg="/static/img/review/2.png">
+								<div class="score purple">9.6</div>
+								<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0); display: flex; justify-content: center; align-items: center; opacity: 0; transition: all 0.3s ease;">
+									<div style="background-color: rgba(0,0,0,0.7); color: white; padding: 10px 15px; border-radius: 5px;">
+										Xem trên Metacritic
+									</div>
+								</div>
+							</div>
+							<div class="review-text">
+								<h5>Baldur's Gate 3</h5>
+								<p>
+									Baldur's Gate 3 là một trò chơi nhập vai tuyệt vời được tạo ra với rất nhiều đam mê và kỹ năng. Mặc dù còn một số vấn đề phút chót cần giải quyết, Larian Studios đã mang đến một cuộc phiêu lưu vượt xa những gì chúng ta có thể tưởng tượng.
+								</p>
+							</div>
 						</div>
-						<div class="review-text">
-							<h5>Doom</h5>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-								dolor sit ame.
-							</p>
-						</div>
-					</div>
+					</a>
 				</div>
 				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="/static/img/review/3.jpg">
-							<div class="score green">9.1</div>
+					<a href="https://www.metacritic.com/game/god-of-war/" target="_blank" style="text-decoration: none; color: inherit;">
+						<div class="review-item" style="transition: all 0.3s ease; cursor: pointer; position: relative;">
+							<div class="review-cover set-bg" data-setbg="/static/img/review/3.png">
+								<div class="score green">9.4</div>
+								<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0); display: flex; justify-content: center; align-items: center; opacity: 0; transition: all 0.3s ease;">
+									<div style="background-color: rgba(0,0,0,0.7); color: white; padding: 10px 15px; border-radius: 5px;">
+										Xem trên Metacritic
+									</div>
+								</div>
+							</div>
+							<div class="review-text">
+								<h5>God of War</h5>
+								<p>
+									Rất hiếm khi một trò chơi khiến tôi bị cuốn hút hoàn toàn như vậy, nhưng God of War chắc chắn là một ứng cử viên sáng giá cho Game of the Year. Nó hoàn hảo trong cách thực hiện và là tiêu chuẩn mới cho các tựa game hành động.
+								</p>
+							</div>
 						</div>
-						<div class="review-text">
-							<h5>Overwatch</h5>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-								dolor sit ame.
-							</p>
-						</div>
-					</div>
+					</a>
 				</div>
 				<div class="col-lg-3 col-md-6">
-					<div class="review-item">
-						<div class="review-cover set-bg" data-setbg="/static/img/review/4.jpg">
-							<div class="score pink">9.7</div>
+					<a href="https://www.metacritic.com/game/grand-theft-auto-v/" target="_blank" style="text-decoration: none; color: inherit;">
+						<div class="review-item" style="transition: all 0.3s ease; cursor: pointer; position: relative;">
+							<div class="review-cover set-bg" data-setbg="/static/img/review/4.jpg">
+								<div class="score pink">9.7</div>
+								<div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255,255,255,0); display: flex; justify-content: center; align-items: center; opacity: 0; transition: all 0.3s ease;">
+									<div style="background-color: rgba(0,0,0,0.7); color: white; padding: 10px 15px; border-radius: 5px;">
+										Xem trên Metacritic
+									</div>
+								</div>
+							</div>
+							<div class="review-text">
+								<h5>GTA V</h5>
+								<p>
+									Một kiệt tác trong số những kiệt tác, GTA 5 đã ra mắt trên các console thế hệ mới với phiên bản cải tiến, và thật khó tin. Đồ họa được cải thiện đáng kể và góc nhìn FPS khiến phiên bản này trở thành một ứng cử viên cho đại sảnh danh vọng.
+								</p>
+							</div>
 						</div>
-						<div class="review-text">
-							<h5>GTA</h5>
-							<p>
-								Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
-								dolor sit ame.
-							</p>
-						</div>
-					</div>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -334,43 +481,42 @@
 					<div class="footer-logo text-white">
 						<img src="/static/img/footer-logo.png" alt="" />
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum dolor
-							sit ame.
+							Game Warrior là trang web chuyên cung cấp tin tức mới nhất về thế giới game, từ các tựa game hot nhất hiện nay đến những xu hướng eSports đang lên.
 						</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-widget mb-5 mb-md-0">
-						<h4 class="fw-title">Latest Posts</h4>
+						<h4 class="fw-title">Các Bài Viết Gần Đây</h4>
 						<div class="latest-blog">
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="/static/img/latest-blog/1.jpg"></div>
+								<div class="lb-thumb set-bg" data-setbg="/static/img/latest-blog/1.png"></div>
 								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
+									<div class="lb-date">06 03 2025</div>
 									<p>
-										Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
+										Một tựa game bất ngờ mở cửa miễn phí trên Steam, người chơi nên nhanh tay trải nghiệm
 									</p>
-									<a href="#" class="lb-author">By Admin</a>
+									<a href="#" class="lb-author">Người đăng: Admin</a>
 								</div>
 							</div>
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="/static/img/latest-blog/2.jpg"></div>
+								<div class="lb-thumb set-bg" data-setbg="/static/img/latest-blog/2.png"></div>
 								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
+									<div class="lb-date">15 03 2025</div>
 									<p>
-										Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
+										Chỉ hơn 300k, nhận ngay 6 tựa game nhập vai quá chất lượng, "lãi" nhiều lần so với giá gốc
 									</p>
-									<a href="#" class="lb-author">By Admin</a>
+									<a href="#" class="lb-author">Người đăng: Admin</a>
 								</div>
 							</div>
 							<div class="lb-item">
-								<div class="lb-thumb set-bg" data-setbg="/static/img/latest-blog/3.jpg"></div>
+								<div class="lb-thumb set-bg" data-setbg="/static/img/latest-blog/3.png"></div>
 								<div class="lb-content">
-									<div class="lb-date">June 21, 2018</div>
+									<div class="lb-date">16 03 2025</div>
 									<p>
-										Lorem ipsum dolor sit amet, consectetur adipisc ing ipsum
+										Bom tấn sinh tồn mới ra mắt trên Steam đã bùng nổ, có hơn 1,5 triệu game thủ chỉ sau vài ngày
 									</p>
-									<a href="#" class="lb-author">By Admin</a>
+									<a href="#" class="lb-author">Người đăng: Admin</a>
 								</div>
 							</div>
 						</div>
@@ -384,40 +530,36 @@
 								<div class="tc-thumb set-bg" data-setbg="/static/img/authors/1.jpg"></div>
 								<div class="tc-content">
 									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum
-										dolor sit amet, co
+										<a href="#">Tỷ Tỷ</a> <span>đã bình luận</span> Khó nha ní ơi!
 									</p>
-									<div class="tc-date">June 21, 2018</div>
+									<div class="tc-date">06 04 2025</div>
 								</div>
 							</div>
 							<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="/static/img/authors/2.jpg"></div>
 								<div class="tc-content">
 									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum
-										dolor sit amet, co
+										<a href="#">Hải Hải</a> <span>đã bình luận</span> Ê nha bro!
 									</p>
-									<div class="tc-date">June 21, 2018</div>
+									<div class="tc-date">05 04 2025</div>
 								</div>
 							</div>
 							<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="/static/img/authors/3.jpg"></div>
 								<div class="tc-content">
 									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum
-										dolor sit amet, co
+										<a href="#">Tài Tài</a> <span>đã bình luận</span> Giỡn quài fen ơi!
 									</p>
-									<div class="tc-date">June 21, 2018</div>
+									<div class="tc-date">30 03 2025</div>
 								</div>
 							</div>
 							<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="/static/img/authors/4.jpg"></div>
 								<div class="tc-content">
 									<p>
-										<a href="#">James Smith</a> <span>on</span> Lorem ipsum
-										dolor sit amet, co
+										<a href="#">Quang Quang</a> <span>đã bình luận</span> Kiểu này phải bán thận nạp game hả trời!
 									</p>
-									<div class="tc-date">June 21, 2018</div>
+									<div class="tc-date">02 04 2025</div>
 								</div>
 							</div>
 						</div>
@@ -430,20 +572,21 @@
 
 	<!-- Footer section -->
 	<%- include('partical/footer'); %>
-		<!-- Footer section end -->
+	<!-- Footer section end -->
 
-		<!--====== Javascripts & Jquery ======-->
-		<script src="/static/js/jquery-3.2.1.min.js"></script>
-		<script src="/static/js/bootstrap.min.js"></script>
-		<script src="/static/js/owl.carousel.min.js"></script>
-		<script src="/static/js/jquery.marquee.min.js"></script>
-		<script src="/static/js/main.js"></script>
-		<script>
-			document.addEventListener("DOMContentLoaded", function () {
-				let videoElements = document.querySelectorAll(".set-bg");
+	<!--====== Javascripts & Jquery ======-->
+	<script src="/static/js/jquery-3.2.1.min.js"></script>
+	<script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/owl.carousel.min.js"></script>
+	<script src="/static/js/jquery.marquee.min.js"></script>
+	<script src="/static/js/main.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			let videoElements = document.querySelectorAll(".set-bg");
 
-				videoElements.forEach(function (el) {
-					let videoUrl = el.getAttribute("data-setbg");
+			videoElements.forEach(function (el) {
+				let videoUrl = el.getAttribute("data-setbg");
+				if (videoUrl && videoUrl.endsWith(".mp4")) {
 					let video = document.createElement("video");
 					video.src = videoUrl;
 					video.autoplay = true;
@@ -459,9 +602,12 @@
 					video.style.zIndex = "-1";
 					el.style.position = "relative";
 					el.prepend(video);
-				});
+				} else if (videoUrl) {
+					el.style.backgroundImage = `url(${videoUrl})`;
+				}
 			});
-		</script>
+		});
+	</script>
 </body>
 
 </html>
