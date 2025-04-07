@@ -32,10 +32,32 @@
   <link rel="stylesheet" href="/static/admin/css/demo.css" />
 </head>
 <body>
+  <% let page = 'User' %>
   <div class="wrapper">
     <!-- Sidebar: Sao chép từ admin.ejs -->
     <div class="sidebar" data-background-color="dark">
-      <!-- Nội dung sidebar giống admin.ejs -->
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item <%= page === 'dashboard' ? 'active' : '' %>">
+            <a href="/admin">
+              <i class="fas fa-home"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item <%= page === 'user' ? 'active' : '' %>">
+            <a href="/admin/user">
+              <i class="fas fa-users"></i>
+              <p>Quản lý tài khoản</p>
+            </a>
+          </li>
+          <li class="nav-item <%= page === 'post' ? 'active' : '' %>">
+            <a href="/admin/post">
+              <i class="fas fa-file-alt"></i>
+              <p>Quản lý bài viết</p>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <!-- End Sidebar -->
 
