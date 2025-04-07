@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Giữ nguyên phần <head> từ hướng dẫn trước -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Quản lý tài khoản - Kaiadmin</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="/static/admin/img/kaiadmin/favicon.ico" type="image/x-icon" />
+  <!-- Fonts and icons -->
+  <script src="/static/admin/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: [
+          "Font Awesome 5 Solid",
+          "Font Awesome 5 Regular",
+          "Font Awesome 5 Brands",
+          "simple-line-icons",
+        ],
+        urls: ["/static/admin/css/fonts.min.css"],
+      },
+      active: function () {
+        sessionStorage.fonts = true;
+      },
+    });
+  </script>
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="/static/admin/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/admin/css/plugins.min.css" />
+  <link rel="stylesheet" href="/static/admin/css/kaiadmin.min.css" />
+  <link rel="stylesheet" href="/static/admin/css/demo.css" />
+</head>
+<body>
+  <div class="wrapper">
+    <!-- Sidebar: Sao chép từ admin.ejs -->
+    <div class="sidebar" data-background-color="dark">
+      <!-- Nội dung sidebar giống admin.ejs -->
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="main-panel">
+      <!-- Navbar: Sao chép từ admin.ejs -->
+      <div class="main-header">
+        <!-- Nội dung navbar giống admin.ejs -->
+      </div>
+      <!-- End Navbar -->
+
+      <div class="container">
+        <div class="page-inner">
+          <!-- Thêm nút Trở về ngay dưới tiêu đề -->
+          <div class="d-flex align-items-center mb-3">
+            <h3 class="fw-bold mb-0">Quản lý tài khoản</h3>
+            <a href="/admin" class="btn btn-secondary btn-round ms-3">
+              <i class="fas fa-arrow-left"></i> Trở về trang admin
+            </a>
+          </div>
+
+          <!-- Hiển thị thông báo lỗi nếu có -->
+          <% if (error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+          <% } %>
+
+          <!-- Form thêm/sửa tài khoản -->
+          <div class="card card-round mb-4">
+            <div class="card-header">
+              <h4 class="card-title">Thêm/Chỉnh sửa tài khoản</h4>
+            </div>
+            <div class="card-body">
+              <form id="userForm" action="/admin/save-user" method="POST">
+                <input type="hidden" name="userId" id="userId">
+                <div class="mb-3">
+                  <label for="username" class="form-label">Tên người dùng</label>
+                  <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                  <label for="password" class="form-label">Mật khẩu</label>
+                  <input type="password" class="form-control" id="password" name="password">
+                  <small class="form-text text-muted">Để trống nếu không muốn thay đổi mật khẩu.</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <button type="button" class="btn btn-secondary" id="resetForm">Hủy</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Bảng danh sách người dùng -->
+          <div class="card card-round">
+            <div class="card-header">
+              <h4 class="card-title">Danh sách người dùng</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table align-items-center mb-0">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Tên người dùng</th>
+                      <th>Email</th>
+                      <th>Ngày tạo</th>
+                      <th>Hành động</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% if (users && users.length > 0) { %>
+                      <% users.forEach(user => { %>
+                        <tr>
+                          <td><%= user.username %></td>
+                          <td><%= user.email %></td>
+                          <td><%= user.createdAt.toLocaleDateString('vi-VN') %></td>
+                          <td>
+                            <button class="btn btn-sm btn-primary" onclick="editUser('<%= user._id %>', '<%= user.username %>', '<%= user.email %>')">Sửa</button>
+                            <a href="/admin/delete-user/<%= user._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa tài khoản này?')">Xóa</a>
+                          </td>
+                        </tr>
+                      <% }) %>
+                    <% } else { %>
+                      <tr>
+                        <td colspan="4" class="text-center">Không có người dùng nào.</td>
+                      </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer: Sao chép từ admin.ejs -->
+      <footer class="footer">
+        <!-- Nội dung footer giống admin.ejs -->
+      </footer>
+    </div>
+  </div>
+
+  <!-- Core JS Files -->
+  <script src="/static/admin/js/core/jquery-3.7.1.min.js"></script>
+  <script src="/static/admin/js/core/popper.min.js"></script>
+  <script src="/static/admin/js/core/bootstrap.min.js"></script>
+  <!-- jQuery Scrollbar -->
+  <script src="/static/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+  <!-- Kaiadmin JS -->
+  <script src="/static/admin/js/kaiadmin.min.js"></script>
+
+  <script>
+    function editUser(id, username, email) {
+      document.getElementById('userId').value = id;
+      document.getElementById('username').value = username;
+      document.getElementById('email').value = email;
+      document.getElementById('password').value = ''; // Không điền sẵn mật khẩu
+    }
+
+    document.getElementById('resetForm').addEventListener('click', () => {
+      document.getElementById('userForm').reset();
+      document.getElementById('userId').value = '';
+    });
+  </script>
+</body>
+</html>

@@ -20,41 +20,57 @@ router.use(async (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log('Decoded token:', decoded);
-      if (!User) {
-        console.log('User model not available');
+      const user = await User.findById(decoded.id);
+      if (!user) {
         res.locals.username = null;
         return next();
       }
-      // Sử dụng async/await thay vì callback
-      const user = await User.findById(decoded.id);
-      if (!user) {
-        console.log('User not found for ID:', decoded.id);
-        res.locals.username = null;
-      } else {
-        console.log('User found:', user);
-        res.locals.username = user.username;
-      }
-      console.log('res.locals.username:', res.locals.username);
+      res.locals.username = user.username;
+      res.locals.role = user.role; // Lưu role vào res.locals
+      console.log('User role:', user.role);
       next();
     } catch (error) {
       console.error('Error verifying token:', error.message);
       res.locals.username = null;
+      res.locals.role = null;
       next();
     }
   } else {
-    console.log('No token found in cookie');
     res.locals.username = null;
+    res.locals.role = null;
     next();
   }
 });
 
+// Middleware kiểm tra admin
+const isAdmin = (req, res, next) => {
+  if (res.locals.role === 'admin') {
+    next();
+  } else {
+    res.redirect('/auth/login');
+  }
+};
+
+// Áp dụng middleware cho các route admin
+router.use("/admin", isAdmin, require(__dirname + "/admin/AdminController"));
 router.use("/home", require(__dirname + "/HomeController"));
 router.use("/contact", require(__dirname + "/ContactController"));
 router.use("/single-blog", require(__dirname + "/SingleBlogController"));
 router.use("/review", require(__dirname + "/ReviewController"));
 router.use("/categories", require(__dirname + "/CategoriesController"));
 router.use("/community", require(__dirname + "/CommunityController"));
+
+//Admin
+router.use("/admin", require(__dirname + "/admin/AdminController"));
+router.use("/widgets", require(__dirname + "/admin/WidgetsController"));
+router.use("/forms", require(__dirname + "/admin/Formscontroller"));
+router.use("/sidebar-style-2", require(__dirname + "/admin/sidebarlayout/SidebarController"));
+router.use("/icon-menu", require(__dirname + "/admin/sidebarlayout/Icon-menuController"));
+router.use("/charts", require(__dirname + "/admin/charts/Chartscontroller"));
+router.use("/sparkline", require(__dirname + "/admin/charts/Sparklinecontroller"));
+router.use("/admin", require(__dirname + "/admin/AdminController"));
+
+
 
 router.get('/auth/register', AuthController.showRegister);
 router.post('/auth/register', AuthController.register);
