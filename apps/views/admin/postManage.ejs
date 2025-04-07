@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Quản lý bài viết - Kaiadmin</title>
+  <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="icon" href="/static/admin/img/kaiadmin/favicon.ico" type="image/x-icon" />
+  <script src="/static/admin/js/plugin/webfont/webfont.min.js"></script>
+  <script>
+    WebFont.load({
+      google: { families: ["Public Sans:300,400,500,600,700"] },
+      custom: {
+        families: ["Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"],
+        urls: ["/static/admin/css/fonts.min.css"],
+      },
+      active: function () { sessionStorage.fonts = true; }
+    });
+  </script>
+  <link rel="stylesheet" href="/static/admin/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/static/admin/css/plugins.min.css" />
+  <link rel="stylesheet" href="/static/admin/css/kaiadmin.min.css" />
+  <link rel="stylesheet" href="/static/admin/css/demo.css" />
+</head>
+<body>
+  <% let page = 'post' %>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar" data-background-color="dark">
+      <div class="sidebar-wrapper">
+        <ul class="nav">
+          <li class="nav-item <%= page === 'dashboard' ? 'active' : '' %>">
+            <a href="/admin">
+              <i class="fas fa-home"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li class="nav-item <%= page === 'user' ? 'active' : '' %>">
+            <a href="/admin/user">
+              <i class="fas fa-users"></i>
+              <p>Quản lý tài khoản</p>
+            </a>
+          </li>
+          <li class="nav-item <%= page === 'post' ? 'active' : '' %>">
+            <a href="/admin/post">
+              <i class="fas fa-file-alt"></i>
+              <p>Quản lý bài viết</p>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-panel">
+      <!-- Navbar -->
+      <div class="main-header">
+        <!-- Nội dung navbar -->
+      </div>
+
+      <div class="container">
+        <div class="page-inner">
+          <div class="d-flex align-items-center mb-3">
+            <h3 class="fw-bold mb-0">Quản lý bài viết</h3>
+            <a href="/admin" class="btn btn-secondary btn-round ms-3">
+              <i class="fas fa-arrow-left"></i> Trở về trang admin
+            </a>
+          </div>
+
+          <% if (error) { %>
+            <div class="alert alert-danger"><%= error %></div>
+          <% } %>
+          <% if (success) { %>
+            <div class="alert alert-success"><%= success %></div>
+          <% } %>
+
+          <!-- Form thêm/sửa bài viết -->
+          <div class="card card-round mb-4">
+            <div class="card-header">
+              <h4 class="card-title">Thêm/Chỉnh sửa bài viết</h4>
+            </div>
+            <div class="card-body">
+              <form id="postForm" action="/admin/save-post" method="POST">
+                <input type="hidden" name="postId" id="postId">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Tiêu đề</label>
+                  <input type="text" class="form-control" id="title" name="title" required>
+                </div>
+                <div class="mb-3">
+                  <label for="content1" class="form-label">Nội dung 1</label>
+                  <textarea class="form-control" id="content1" name="content1" rows="5" required></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="content2" class="form-label">Nội dung 2 (Tùy chọn)</label>
+                  <textarea class="form-control" id="content2" name="content2" rows="5"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="content3" class="form-label">Nội dung 3 (Tùy chọn)</label>
+                  <textarea class="form-control" id="content3" name="content3" rows="5"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="author" class="form-label">Tác giả</label>
+                  <select class="form-control" id="author" name="author" required>
+                    <% users.forEach(user => { %>
+                      <option value="<%= user._id %>"><%= user.username %></option>
+                    <% }) %>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label for="category" class="form-label">Danh mục</label>
+                  <input type="text" class="form-control" id="category" name="category">
+                </div>
+                <div class="mb-3">
+                  <label for="imageUrl" class="form-label">URL hình ảnh 1</label>
+                  <input type="text" class="form-control" id="imageUrl" name="imageUrl">
+                </div>
+                <div class="mb-3">
+                  <label for="imageUrl2" class="form-label">URL hình ảnh 2</label>
+                  <input type="text" class="form-control" id="imageUrl2" name="imageUrl2">
+                </div>
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <button type="button" class="btn btn-secondary" id="resetForm">Hủy</button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Bảng danh sách bài viết -->
+<div class="card card-round">
+    <div class="card-header">
+      <h4 class="card-title">Danh sách bài viết</h4>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table align-items-center mb-0">
+          <thead class="thead-light">
+            <tr>
+              <th>Tiêu đề</th>
+              <th>Tác giả</th>
+              <th>Ngày tạo</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (posts && posts.length > 0) { %>
+              <% posts.forEach(post => { %>
+                <tr>
+                  <td><%= post.title || 'Không có tiêu đề' %></td>
+                  <td><%= post.author && post.author.username ? post.author.username : 'Không rõ tác giả' %></td>
+                  <td><%= post.createdAt ? post.createdAt.toLocaleDateString('vi-VN') : 'Không rõ ngày' %></td>
+                  <td>
+                    <button class="btn btn-sm btn-primary edit-post-btn"
+                      data-id="<%= post._id %>"
+                      data-title="<%= post.title || '' %>"
+                      data-content1="<%= post.content1 || '' %>"
+                      data-content2="<%= post.content2 || '' %>"
+                      data-content3="<%= post.content3 || '' %>"
+                      data-author="<%= post.author ? post.author._id : '' %>"
+                      data-category="<%= post.category || '' %>"
+                      data-imageurl="<%= post.imageUrl || '' %>"
+                      data-imageurl2="<%= post.imageUrl2 || '' %>">Sửa</button>
+                    <a href="/admin/delete-post/<%= post._id %>" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc muốn xóa bài viết này?')">Xóa</a>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } else { %>
+              <tr>
+                <td colspan="4" class="text-center">Không có bài viết nào.</td>
+              </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <!-- Nội dung footer -->
+      </footer>
+    </div>
+  </div>
+
+  <script src="/static/admin/js/core/jquery-3.7.1.min.js"></script>
+  <script src="/static/admin/js/core/popper.min.js"></script>
+  <script src="/static/admin/js/core/bootstrap.min.js"></script>
+  <script src="/static/admin/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="/static/admin/js/kaiadmin.min.js"></script>
+
+  <script>
+    function editPost(id, title, content1, content2, content3, author, category, imageUrl, imageUrl2) {
+      document.getElementById('postId').value = id;
+      document.getElementById('title').value = title;
+      document.getElementById('content1').value = content1;
+      document.getElementById('content2').value = content2;
+      document.getElementById('content3').value = content3;
+      document.getElementById('author').value = author;
+      document.getElementById('category').value = category;
+      document.getElementById('imageUrl').value = imageUrl;
+      document.getElementById('imageUrl2').value = imageUrl2;
+    }
+  
+    // Thêm sự kiện click cho các nút "Sửa"
+    document.querySelectorAll('.edit-post-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const id = button.getAttribute('data-id');
+        const title = button.getAttribute('data-title');
+        const content1 = button.getAttribute('data-content1');
+        const content2 = button.getAttribute('data-content2');
+        const content3 = button.getAttribute('data-content3');
+        const author = button.getAttribute('data-author');
+        const category = button.getAttribute('data-category');
+        const imageUrl = button.getAttribute('data-imageurl');
+        const imageUrl2 = button.getAttribute('data-imageurl2');
+        editPost(id, title, content1, content2, content3, author, category, imageUrl, imageUrl2);
+      });
+    });
+  
+    document.getElementById('resetForm').addEventListener('click', () => {
+      document.getElementById('postForm').reset();
+      document.getElementById('postId').value = '';
+    });
+  </script>
+</body>
+</html>
