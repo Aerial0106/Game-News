@@ -2,17 +2,65 @@
 <html lang="vi">
 <head>
     <style>
-        .header .container {
-            display: flex; /* Sử dụng flexbox để căn chỉnh */
-            justify-content: space-between; /* Đẩy các phần tử ra hai đầu */
+        .header {
+            background-color: #000000; /* Màu đen đậm giống hình ảnh */
+            padding: 10px 20px;
+            color: #fff;
+            width: 100%; /* Đảm bảo header dài hết màn hình */
+            box-sizing: border-box; /* Bao gồm padding trong chiều rộng */
+        }
+        .container {
+            display: flex; /* Sử dụng flexbox */
+            justify-content: space-between; /* Phân bố không gian */
             align-items: center; /* Căn giữa theo chiều dọc */
+            max-width: 100%; /* Đảm bảo container không giới hạn chiều rộng */
+            margin: 0 auto; /* Căn giữa nếu cần */
+            width: 100%; /* Đảm bảo container dài hết header */
+        }
+        .site-logo {
+            color: #ffa500; /* Màu vàng cam cho logo */
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .site-logo i {
+            margin-right: 5px;
         }
         .main-menu {
-            flex-grow: 1; /* Cho menu chiếm không gian giữa */
-            margin-right: 20px; /* Khoảng cách với user-panel */
+            display: flex; /* Sử dụng flexbox cho menu */
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-grow: 1; /* Cho phép menu mở rộng để lấp đầy không gian */
+        }
+        .main-menu li {
+            margin: 0 15px;
+        }
+        .main-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
         }
         .user-panel {
-            white-space: nowrap; /* Giữ Login/Register trên cùng một dòng */
+            display: flex; /* Sử dụng flexbox để căn chỉnh nút */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            gap: 10px; /* Khoảng cách giữa các nút */
+        }
+        .user-panel a {
+            display: flex;
+            align-items: center;
+            background-color: #ffa500; /* Màu cam cho nút */
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px; /* Bo tròn viền */
+            text-decoration: none;
+            font-size: 14px;
+            gap: 5px; /* Khoảng cách giữa icon và text */
+        }
+        .user-panel a i {
+            font-size: 14px;
         }
     </style>
 </head>
@@ -35,7 +83,18 @@
                     <li><a href="/contact">Liện Hệ</a></li>
                 </ul>
             </nav>
-            
+            <div class="user-panel">
+                <% if (username) { %>
+                    <span>Xin chào, <%= username %>!</span> 
+                    <a href="/auth/logout" class="logout-btn" title="Đăng xuất">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="text">Đăng xuất</span>
+                    </a>
+                <% } else { %>
+                    <a href="/auth/login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
+                    <a href="/auth/register"><i class="fas fa-user-plus"></i> Đăng ký</a>
+                <% } %>
+            </div>
         </div>
     </header>
 </body>

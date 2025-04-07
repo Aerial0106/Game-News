@@ -98,18 +98,7 @@
 		<div class="container">
 			<div class="header-wrapper">
 				<%- include('partical/menu'); %>
-				<div class="user-panel">
-					<% if (username) { %>
-						<span>Xin chào, <%= username %>!</span> 
-						<a href="/auth/logout" class="logout-btn" title="Đăng xuất">
-							<i class="fas fa-sign-out-alt"></i>
-							<span class="text">Đăng xuất</span>
-						</a>
-					<% } else { %>
-						<a href="/auth/login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a>
-						<a href="/auth/register"><i class="fas fa-user-plus"></i> Đăng ký</a>
-					<% } %>
-				</div>
+				
 			</div>
 		</div>
 	</header>

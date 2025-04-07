@@ -33,7 +33,6 @@
             font-family: 'Roboto', sans-serif;
         }
         
-        
         .blog-container {
             background: white;
             border-radius: 8px;
@@ -134,7 +133,10 @@
     <!-- Header with Navigation -->
     <header class="header-section">
         <div class="container">
-            <%- include('partical/menu'); %>
+            <div class="header-wrapper">
+                <%- include('partical/menu'); %>
+                
+            </div>
         </div>
     </header>
 
@@ -162,8 +164,6 @@
 
                 <!-- Article Content -->
                 <article class="blog-content">
-                    
-                    
                     <div class="content-section">
                         <%- blog.content1 || 'Nội dung đang cập nhật...' %>
                     </div>
@@ -175,12 +175,10 @@
                             <%- blog.content2 %>
                         </div>
                     <% } %>
-
-					<% if (blog.imageUrl2) { %>
+                    <% if (blog.imageUrl2) { %>
                         <img src="<%= blog.imageUrl2 %>" class="featured-image" alt="<%= blog.title %>">
                     <% } %>
-
-					<% if (blog.content3) { %>
+                    <% if (blog.content3) { %>
                         <div class="content-section">
                             <%- blog.content3 %>
                         </div>

@@ -21,9 +21,13 @@ router.get('/:id', async (req, res) => {
         blog.views += 1;
         await blog.save();
 
+        // Lấy username từ req.user nếu người dùng đã đăng nhập
+        const username = req.user ? req.user.username : null;
+
         res.render('single-blog', { 
             blog: blog,
-            user: req.user || null
+            user: req.user || null,
+            username: username // Truyền username vào template
         });
     } catch (err) {
         console.error(err);
