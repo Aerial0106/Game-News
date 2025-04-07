@@ -24,18 +24,18 @@ async function seedDatabase() {
     // 🔹 Tạo bài viết với user có sẵn
     const sampleBlogs = [
       {
-        title: 'Đấu Trường Chân Lý mùa 14: Thử nghiệm đội hình Twisted Fate Reroll "độc lạ"',
-        content1: 'Tổng quan đội hình Twisted Fate Reroll của ĐTCL mùa 14. Một trong những tộc hệ khá thú vị ở ĐTCL mùa 14 chính là Băng Đảng với cơ chế kích hoạt một trang bị mang tên Kingpins Hat (Mũ Ông Trùm) để tăng sức mạnh cho tướng Băng Đảng sở hữu. Trong số này, Twisted Fate Reroll đang nổi lên như một lối chơi khá hiệu quả, khi chủ lực Twisted Fate có thể đảm bảo sức mạnh xuyên suốt ván đấu, còn những quân cờ còn lại có thể kết hợp các tộc hệ khác tạo nên một đội hình khá toàn diện.',
-        content2: 'Đặc biệt, đội hình này không yêu cầu bất kỳ ấn nào cộng thêm để kích hoạt các mốc cần thiết cho tướng chủ lực. Đồng thời, người chơi cũng chỉ cần tập trung trang bị cho Darius (thủ) và Twisted Fate (công). Do đó, người chơi có thể thoải mái trong các vòng Chọn Chung mà không sợ trang bị của mình bị tranh giành quá nhiều.Hướng dẫn xây dựng đội hình Twisted Fate Reroll Là những vị tướng 1 - 2 vàng, người chơi có thể dễ dàng sở hữu bộ ba Darius - Twisted Fate - Shaco ngay từ những cấp độ đầu tiên. Chỉ cần thêm một tướng Đấu Sĩ là đủ để đội hình này có thể vượt qua các round đầu. Thậm chí, người chơi có thể roll liên tục, chấp nhận các ván thua đầu trận để có vị trí "đẹp" cho vòng Chọn Chung và có được các trang bị như ý.',
-        content3: 'Từ cấp độ 6, người chơi có thể bổ sung Braum - vị tướng chống chịu khá chất lượng để bổ sung sức mạnh phòng thủ. Với việc TF là vị tướng mỏng, lối chơi xoay quanh quân cờ này cần nhiều dàn chắn nhất có thể. Người chơi có thể lựa chọn Skarner 2 vàng để kích hệ cùng với Braum, và Gragas để kích hệ Đấu Sĩ (nếu có). Ngoài ra, có thể bổ sung thêm KogMaw để kích hệ Liên Kích cho TF.',
+        title: ' "Elden Ring: Nightreign là một bản spin-off chơi co-op độc lập"',
+        content1: 'Nhà phát triển FromSoftware và nhà phát hành Bandai Namco đã chính thức công bố Elden Ring: Nightreign – một tựa game spin-off chơi phối hợp độc lập, lấy bối cảnh trong một thế giới song song với Elden Ring phát hành năm 2022.',
+        content2: 'Từ đó, người chơi sẽ phải nhanh chóng tiêu diệt các trại địch và tìm kiếm vũ khí mạnh hơn, để khi màn đêm buông xuống, họ có cơ hội sống sót cao hơn trước những trận chiến trùm đầy thử thách. Nếu người chơi sống sót được trong ba ngày trong game, họ sẽ phải đối mặt với một con trùm lớn. Tổng cộng sẽ có tám trùm lớn mà người chơi cần tìm kiếm và chinh phục trong trò chơi.',
+        content3: 'Được thiết kế để phù hợp với cả người chơi kỳ cựu lẫn người mới, Elden Ring: Nightreign mang đến danh sách 8 nhân vật có thể điều khiển, mỗi nhân vật sở hữu kỹ năng riêng biệt và đòn tấn công tối thượng độc đáo. Nightreign là một game nhập vai dạng "chơi theo phiên" (session-based RPG), hướng đến trải nghiệm trực tuyến với tối đa 3 người chơi, tuy nhiên chế độ chơi đơn cũng sẽ được hỗ trợ.',
         author: savedUsers[1]._id, // Lấy _id của user thứ 2
-        category: 'Hướng dẫn',
-        imageUrl: '/static/img/single-blog/tft.jpg',
-        ImageUrl2: '/staticstatic/img/single-blog/tft(2).jpg',
+        category: 'Tin hot',
+        imageUrl: '/static/img/recent-game/3.png',
+        imageUrl2: '/static/img/recent-game/3.1.png',
         views: 0,
         comments: [{
           user: savedUsers[0]._id, // Lấy _id của user thứ 1
-          text: 'Mùa mới này hơi khó chơi nha bro!',
+          text: 'Rất đáng mong đợi nha bro.',
           createdAt: new Date()
         }]
       }
